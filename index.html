@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AVA™ MatchBook ROI Calculator</title>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #ffffff;
+      color: #000000;
+      max-width: 760px;
+      margin: 30px auto;
+      padding: 20px;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+    header img {
+      max-width: 180px;
+      height: auto;
+    }
+    h1 {
+      color: #9858ff;
+      font-size: 2rem;
+      margin-top: 10px;
+    }
+    .brand-points {
+      background-color: #f9f5ff;
+      border-left: 4px solid #9858ff;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 32px;
+    }
+    .brand-points li {
+      list-style: none;
+      margin-bottom: 12px;
+      position: relative;
+      padding-left: 24px;
+      font-weight: 600;
+    }
+    .brand-points li::before {
+      content: '✔';
+      color: #a644d4;
+      position: absolute;
+      left: 0;
+      font-weight: bold;
+    }
+    .calculator label {
+      display: block;
+      margin: 12px 0 4px;
+      font-weight: 600;
+      color: #000000;
+    }
+    .calculator input {
+      width: 100%;
+      padding: 10px;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      margin-bottom: 12px;
+    }
+    .calculator-section {
+      background: #f2f2f2;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 24px;
+    }
+    .results {
+      background: #fff;
+      border: 1px solid #ddd;
+      padding: 20px;
+      border-radius: 8px;
+    }
+    .results p {
+      font-size: 1rem;
+      margin: 8px 0;
+    }
+    .results ul {
+      color: #a644d4;
+      font-weight: 600;
+      padding-left: 20px;
+      margin-top: 8px;
+    }
+    .results ul li {
+      margin-bottom: 8px;
+      position: relative;
+    }
+    /* Container for the savings + animated circle */
+    .savings-wrapper {
+      position: relative;
+      display: inline-block;
+      padding: 4px 12px 10px 12px;
+    }
+    svg.highlight-circle {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 30px;
+      pointer-events: none;
+      stroke-dasharray: 200;
+      stroke-dashoffset: 200;
+      stroke: red;
+      stroke-width: 4;
+      stroke-linecap: round;
+      fill: none;
+      animation: drawCircle 1s ease forwards;
+      z-index: -1;
+    }
+    button {
+      background-color: #9858ff;
+      color: #fff;
+      border: none;
+      padding: 14px;
+      font-size: 1.1rem;
+      border-radius: 6px;
+      width: 100%;
+      cursor: pointer;
+      margin-top: 12px;
+    }
+    button:hover {
+      background-color: #7f46d4;
+    }
+    @keyframes drawCircle {
+      to {
+        stroke-dashoffset: 0;
+      }
+    }
+    /* New ROI input section style */
+    .roi-section {
+      background: #eae6ff;
+      padding: 16px;
+      border-radius: 8px;
+      margin-bottom: 24px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <img src="https://i.imgur.com/yUM6oSE.png" alt="Autocorp.ai Logo" />
+  <h1>AVA™ MatchBook ROI Calculator</h1>
+</header>
+
+<ul class="brand-points">
+  <li>Canadian Black Book-powered trade‑in valuations</li>
+  <li>DMS inventory syndication</li>
+  <li>Lender backend profit calculation</li>
+  <li>Lender approval logic</li>
+  <li>Inventory search based on trade‑in & equity position</li>
+  <li>Lender & vehicle comparison tool</li>
+  <li>Intelligent inventory filtering</li>
+</ul>
+
+<div class="calculator">
+  <div class="calculator-section">
+    <label for="profitPerDeal">Profit per Deal ($):</label>
+    <input type="number" id="profitPerDeal" value="7500" />
+
+    <label for="dealsPerMonth">Deals per Month:</label>
+    <input type="number" id="dealsPerMonth" value="30" />
+
+    <label for="manualTimePerDeal">Manual Time per Deal (hrs):</label>
+    <input type="number" id="manualTimePerDeal" value="1.5" />
+
+    <label for="staffHourlyRate">Staff Time Value ($/hr):</label>
+    <input type="number" id="staffHourlyRate" value="100" />
+  </div>
+
+  <div class="results">
+    <p>📉 <strong>Current Process</strong></p>
+    <p>Monthly Profit: $<span id="monthlyProfit">225,000.00</span></p>
+    <p>Total Manual Time: <span id="totalManualHours">45.00</span> hrs</p>
+    <p>Manual Process Time Cost: $<span id="manualCost">4,500.00</span></p>
+
+    <p>🚀 <strong>With Matchbook (65% Time Savings)</strong></p>
+    <ul>
+      <li>Time Saved: <span id="timeSaved">29.25</span> hrs/month</li>
+      <li>New Time Cost: $<span id="newCost">1,575.00</span></li>
+      <li>Monthly Time Savings:
+        <span class="savings-wrapper">
+          $<span id="savings">2,925.00</span>
+          <svg class="highlight-circle" viewBox="0 0 100 50" preserveAspectRatio="none">
+            <path d="M5,25 Q50,60 95,25" />
+          </svg>
+        </span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="roi-section">
+    <label for="monthlyPrice">Monthly Price for MatchBook ($):</label>
+    <input type="number" id="monthlyPrice" value="" min="0" />
+
+    <p><strong>Estimated Monthly ROI: $<span id="roi">0.00</span></strong></p>
+  </div>
+
+  <button onclick="window.open('https://meetings-na3.hubspot.com/jayson', '_blank')">Book a Full Demo</button>
+</div>
+
+<script>
+  const timeSavingsRate = 0.65;
+
+  function animateCircle() {
+    const circle = document.querySelector('.highlight-circle');
+    if (circle) {
+      circle.style.animation = 'none';
+      void circle.offsetWidth;
+      circle.style.animation = 'drawCircle 1s ease forwards';
+    }
+  }
+
+  function calculate() {
+    const profitPerDeal = +document.getElementById('profitPerDeal').value || 0;
+    const dealsPerMonth = +document.getElementById('dealsPerMonth').value || 0;
+    const manualTime = +document.getElementById('manualTimePerDeal').value || 0;
+    const rate = +document.getElementById('staffHourlyRate').value || 0;
+
+    const monthlyProfit = profitPerDeal * dealsPerMonth;
+    const totalManualHours = manualTime * dealsPerMonth;
+    const manualCost = totalManualHours * rate;
+    const timeSaved = totalManualHours * timeSavingsRate;
+    const newCost = (totalManualHours - timeSaved) * rate;
+    const savings = manualCost - newCost;
+
+    const monthlyPrice = +document.getElementById('monthlyPrice').value || 0;
+    const roi = savings - monthlyPrice;
+
+    document.getElementById('monthlyProfit').textContent = monthlyProfit.toLocaleString(undefined, {minimumFractionDigits: 2});
+    document.getElementById('totalManualHours').textContent = totalManualHours.toFixed(2);
+    document.getElementById('manualCost').textContent = manualCost.toLocaleString(undefined, {minimumFractionDigits: 2});
+    document.getElementById('timeSaved').textContent = timeSaved.toFixed(2);
+    document.getElementById('newCost').textContent = newCost.toLocaleString(undefined, {minimumFractionDigits: 2});
+    document.getElementById('savings').textContent = savings.toLocaleString(undefined, {minimumFractionDigits: 2});
+    document.getElementById('roi').textContent = roi.toLocaleString(undefined, {minimumFractionDigits: 2});
+
+    animateCircle();
+  }
+
+  document.querySelectorAll('input').forEach(input => {
+    input.addEventListener('input', calculate);
+  });
+
+  calculate();
+</script>
+
+</body>
+</html>
+
