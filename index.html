@@ -195,6 +195,8 @@
     }
     .count {
       display: inline-block;
+      color: #9858ff; /* Purple numbers */
+      font-weight: 700;
     }
 
     @keyframes fadeSlideIn {
@@ -329,7 +331,10 @@
     counters.forEach(counter => {
       const target = +counter.getAttribute('data-target');
       let count = 0;
-      const increment = target / 40;
+      const duration = 3000; // 3 seconds duration
+      const frameRate = 60;
+      const totalFrames = Math.round(duration / (1000 / frameRate));
+      const increment = target / totalFrames;
 
       const update = () => {
         count += increment;
@@ -348,10 +353,10 @@
     input.addEventListener('input', calculate);
   });
 
-  // Run calculations and animations on load
   calculate();
   animateCounts();
 </script>
 
 </body>
 </html>
+
