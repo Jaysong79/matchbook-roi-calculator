@@ -53,7 +53,6 @@
       display: block;
       margin: 12px 0 4px;
       font-weight: 600;
-      color: #000000;
     }
     .calculator input {
       width: 100%;
@@ -156,10 +155,6 @@
       font-size: 1.5rem;
       margin-top: 0;
     }
-    .success-banner p {
-      margin-bottom: 12px;
-      font-weight: 500;
-    }
     .success-banner ul {
       padding-left: 20px;
       margin: 10px 0;
@@ -180,6 +175,12 @@
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(-10px); }
       to { opacity: 1; transform: translateY(0); }
+    }
+    .success-banner.sticky {
+      position: sticky;
+      bottom: 0;
+      z-index: 999;
+      box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.3);
     }
   </style>
 </head>
@@ -242,8 +243,8 @@
     <p><strong>Estimated Monthly ROI: $<span id="roi">0.00</span></strong></p>
   </div>
 
-  <!-- 🎯 Success Banner Moved to Bottom -->
-  <div class="success-banner">
+  <!-- Sticky Success Banner -->
+  <div class="success-banner sticky">
     <h2>Driving Success By Numbers 🚀</h2>
     <p>AVA™ has helped dealerships across the country achieve remarkable results. From increased sales conversions to reduced fraud losses, we deliver measurable ROI.</p>
     <ul>
