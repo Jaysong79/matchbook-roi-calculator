@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -26,6 +26,51 @@
       font-size: 2rem;
       margin-top: 10px;
     }
+
+    .success-banner {
+      background-color: #f3e9ff;
+      border: 1px solid #d4b5ff;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 24px;
+      animation: fadeIn 1s ease;
+    }
+    .success-banner h2 {
+      color: #9858ff;
+      margin-top: 0;
+      font-size: 1.5rem;
+    }
+    .success-banner p {
+      margin-bottom: 12px;
+      font-weight: 500;
+    }
+    .success-banner ul {
+      padding-left: 20px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+    .success-banner ul li {
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #5a2b90;
+    }
+    .success-banner small {
+      display: block;
+      margin-top: 8px;
+      font-size: 0.85rem;
+      color: #666;
+    }
+
+    .count {
+      display: inline-block;
+      color: #5a2b90;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
     .brand-points {
       background-color: #f9f5ff;
       border-left: 4px solid #9858ff;
@@ -87,7 +132,6 @@
       margin-bottom: 8px;
       position: relative;
     }
-    /* Container for the savings + animated circle */
     .savings-wrapper {
       position: relative;
       display: inline-block;
@@ -128,7 +172,6 @@
         stroke-dashoffset: 0;
       }
     }
-    /* New ROI input section style */
     .roi-section {
       background: #eae6ff;
       padding: 16px;
@@ -143,6 +186,18 @@
   <img src="https://i.imgur.com/yUM6oSE.png" alt="Autocorp.ai Logo" />
   <h1>AVA™ MatchBook ROI Calculator</h1>
 </header>
+
+<div class="success-banner">
+  <h2>Driving Success By Numbers 🚀</h2>
+  <p>AVA™ has helped dealerships across the country achieve remarkable results. From increased sales conversions to reduced fraud losses, we deliver measurable ROI.</p>
+  <ul>
+    <li><span class="count" data-target="35">0</span>% Increase in conversion rates*</li>
+    <li><span class="count" data-target="40">0</span>% Increase in contact rates*</li>
+    <li><span class="count" data-target="55">0</span>% Increase in generated leads*</li>
+    <li><span class="count" data-target="28">0</span>% Increase in revenue*</li>
+  </ul>
+  <small>*Results are based on average performance across AVA™ clients. Actual results may vary depending on factors like dealership traffic and advertising efforts.</small>
+</div>
 
 <ul class="brand-points">
   <li>Canadian Black Book-powered trade‑in valuations</li>
@@ -193,7 +248,6 @@
   <div class="roi-section">
     <label for="monthlyPrice">Monthly Price for MatchBook ($):</label>
     <input type="number" id="monthlyPrice" value="" min="0" />
-
     <p><strong>Estimated Monthly ROI: $<span id="roi">0.00</span></strong></p>
   </div>
 
@@ -239,12 +293,26 @@
     animateCircle();
   }
 
-  document.querySelectorAll('input').forEach(input => {
-    input.addEventListener('input', calculate);
-  });
+  // Count-up animation for success metrics
+  function animateCounts() {
+    const counters = document.querySelectorAll('.count');
+    counters.forEach(counter => {
+      const target = +counter.getAttribute('data-target');
+      let count = 0;
+      const increment = target / 40;
 
-  calculate();
-</script>
+      const update = () => {
+        count += increment;
+        if (count < target) {
+          counter.textContent = Math.floor(count);
+          requestAnimationFrame(update);
+        } else {
+          counter.textContent = target;
+        }
+      };
+      update();
+    })
+
 
 </body>
 </html>
